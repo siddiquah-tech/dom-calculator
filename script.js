@@ -1,22 +1,24 @@
-const display = document.getElementById("display");
-const buttons = document.querySelectorAll(".btn");
-const clear = document.getElementById("clear");
-const equals = document.getElementById("equals");
+const display = document.getElementById("display")
+const buttons = document.querySelectorAll(".buttons button")
 
 buttons.forEach(button => {
-  button.addEventListener("click", () => {
-    display.value += button.getAttribute("data-value");
-  });
-});
+    button.addEventListener('click', () => {
+        const value = button.textContent
+        console.log(value);
+        if(value === '=') {
+            try {
+                display.value = eval(display.value)
+            }
+            catch(err) {
+                display.value = 'Error'
+            }
+        }
+        else if(value === "CLEAR") {
+            display.value = ''
+        }
+        else {
+            display.value +=value
+        }
+    })
+})
 
-clear.addEventListener("click", () => {
-  display.value = "";
-});
-
-equals.addEventListener("click", () => {
-  try {
-    display.value = eval(display.value);
-  } catch {
-    display.value = "Error";
-  }
-});
